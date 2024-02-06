@@ -4,14 +4,14 @@ const output = document.getElementById("output");
 
 const importKey=()=>{
   const data=(new TextEncoder()).encode(pass.value);
-  window.crypto.subtle.importKey("raw",data,"PBKDF2",false,["deriveKey"]);
+  return window.crypto.subtle.importKey("raw",data,"PBKDF2",false,["deriveKey"]);
 }
 
 const deriveKey=()=>{
   const salt=window.crypto.getRandomValues(new Uint8Array(16));
   const algo={name:"PBKDF2",hash:"SHA-256",salt,iterations:100000};
   const base=importKey();
-  window.crypto.subtle.deriveKey(algo,base,{name:"AES-GCM",length:256},false,["encrypt"]);
+  return window.crypto.subtle.deriveKey(algo,base,{name:"AES-GCM",length:256},false,["encrypt"]);
 }
 
 const encrypt=()=>{
@@ -22,6 +22,7 @@ const encrypt=()=>{
   const data=file.arrayBuffer();
   window.crypto.subtle.encrypt(algo,key,data).then(ab=>{
     output.href=window.URL.createObjectURL(new File([iv,ab],file.name+"-e"));
+    output.textContent="download encrypted file";
   });
 }
 
