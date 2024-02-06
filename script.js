@@ -2,7 +2,14 @@ const pass = document.getElementById("pass");
 const plain = document.getElementById("plain");
 const output = document.getElementById("output");
 
+const importKey=()=>{
+}
+
 const deriveKey=()=>{
+  const salt=window.crypto.getRandomValues(new Uint8Array(16));
+  const algo={name:"PBKDF2",hash:"SHA-256",salt,iterations:100000};
+  const base=importKey();
+  window.crypto.subtle.deriveKey(algo,base,{name:"AES-GCM",length:256},false,["encrypt"]);
 }
 
 const encrypt=()=>{
