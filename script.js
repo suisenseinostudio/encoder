@@ -26,7 +26,7 @@ const encrypt=async()=>{
   const key=await deriveKey();
   log.append("derived ");
   const file=plain.files[0];
-  const data=file.arrayBuffer();
+  const data=await file.arrayBuffer();
   log.append("window.crypto.subtle.encrypt ");
   try{
   const ab=await window.crypto.subtle.encrypt(algo,key,data);
