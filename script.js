@@ -19,7 +19,7 @@ const deriveKey=async()=>{
 };
 
 const encrypt=async()=>{
-  if(!(pass.value&&plain.files))return;
+  if(pass.value==""||plain.files.length==0)return;
   log.append("encrypt ");
   const iv=window.crypto.getRandomValues(new Uint8Array(12));
   const algo={name:"AES-GCM",iv};
@@ -28,12 +28,11 @@ const encrypt=async()=>{
   const file=plain.files[0];
   const data=file.arrayBuffer();
   log.append("window.crypto.subtle.encrypt ");
-  window.crypto.subtle.encrypt(algo,key,data).then(ab=>{
-    log.append("encrypted ");
-    output.href=window.URL.createObjectURL(new File([iv,ab],file.name+"-e"));
-    output.textContent="download encrypted file";
-    log.append("done ");
-  });
+  const ab=await window.crypto.subtle.encrypt(algo,key,data);
+  log.append("encrypted ");
+  output.href=window.URL.createObjectURL(new File([iv,ab],file.name+"-e"));
+  output.textContent="download encrypted file";
+  log.append("done ");
 };
 
 pass.onchange=encrypt;
