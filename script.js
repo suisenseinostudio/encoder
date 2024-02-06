@@ -3,6 +3,8 @@ const plain = document.getElementById("plain");
 const output = document.getElementById("output");
 
 const importKey=()=>{
+  const data=(new TextEncoder()).encode(pass.value);
+  window.crypto.subtle.importKey("raw",data,"PBKDF2",false,["deriveKey"]);
 }
 
 const deriveKey=()=>{
