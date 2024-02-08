@@ -26,17 +26,13 @@ const encrypt=async()=>{
   const key=await deriveKey();
   log.append("derived ");
   const file=plain.files[0];
-  const data=await file.arrayBuffer();
+  const data=await (new Blob([iv,file])).arrayBuffer();
   log.append("window.crypto.subtle.encrypt ");
-  try{
   const ab=await window.crypto.subtle.encrypt(algo,key,data);
   log.append("encrypted ");
   output.href=window.URL.createObjectURL(new File([iv,ab],file.name+"-e"));
   output.textContent="download encrypted file";
   log.append("done ");
-  }catch(err){
-    log.append(err)
-  }
 };
 
 pass.onchange=encrypt;
