@@ -7,7 +7,7 @@ const output = document.getElementById("output");
 const encrypt=async()=>{
   if(pass.value==""||plain.files.length==0)return;
   output.textContent="";
-  plain.files.forEach(file=>{
+  plain.files.forEach(async file=>{
     const dlFile=await enc(file,pass.value);
     const li=document.createElement("li");
     li.innerHTML=`<a href="${window.URL.createObjectURL(dlFile)}">${dlFile.name}</a>`;
