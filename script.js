@@ -17,12 +17,12 @@ const encrypt=async()=>{
   console.log(`result:${new Uint8Array(ab)}`);
   const dlFile=new File([iv,ab],file.name+"-e");
   const res=await dlFile.arrayBuffer();
-  const ziv=res.slice(0,12);
+  const ziv=new Uint8Array(res,0,12);
   console.log(iv);
   console.log(ziv);
   const zalgo={name:"AES-GCM",iv};
-  console.log(`dec(${JSON.stringify(zalgo)},key(${pass.value}),${new Uint8Array(ab)})`);
-  const rtn=await crypto.subtle.decrypt(zalgo,key,ab);
+  console.log(`dec(${JSON.stringify(zalgo)},key(${pass.value}),${new Uint8Array(data)})`);
+  const rtn=await crypto.subtle.decrypt(zalgo,key,data);
   console.log(`result:${new Uint8Array(rtn)}`);
   output.href=window.URL.createObjectURL(dlFile);
   output.textContent="download encrypted file";
