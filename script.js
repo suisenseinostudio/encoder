@@ -21,6 +21,8 @@ const encrypt=async()=>{
   console.log(iv);
   console.log(ziv);
   const zalgo={name:"AES-GCM",ziv};
+  console.log(`dec(${JSON.stringify(algo)},key(${pass.value}),${new Uint8Array(ab)})`);
+  const rtn=await crypto.subtle.decrypt(algo,key,ab);
   console.log(`dec(${JSON.stringify(zalgo)},key(${pass.value}),${new Uint8Array(ab)})`);
   const rtn=await crypto.subtle.decrypt(zalgo,key,ab);
   console.log(`result:${new Uint8Array(rtn)}`);
