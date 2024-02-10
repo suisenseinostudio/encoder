@@ -1,4 +1,5 @@
 import {enc,dec} from "https://suisenseinostudio.github.io/deriveKey/ed.js";
+import {deriveKey} from "https://suisenseinostudio.github.io/deriveKey/derive-key.js";
 
 const pass = document.getElementById("pass");
 const plain = document.getElementById("plain");
