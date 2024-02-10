@@ -17,7 +17,7 @@ const encrypt=async()=>{
   console.log(`result:${new Uint8Array(ab)}`);
   const dlFile=new File([iv,ab],file.name+"-e");
   const res=await dlFile.arrayBuffer();
-  const ziv=new Uint8Array(res.slice(0,12));
+  const ziv=new Uint8Array(res,0,12);
   const zalgo={name:"AES-GCM",iv:ziv};
   const zab=res.slice(12,res.byteLength);
   console.log(`dec(${JSON.stringify(zalgo)},key(${pass.value}),${new Uint8Array(zab)})`);
