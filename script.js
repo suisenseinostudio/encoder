@@ -18,11 +18,11 @@ const encrypt=async()=>{
   const dlFile=new File([iv,ab],file.name+"-e");
   const res=await dlFile.arrayBuffer();
   const ziv=iv//new Uint8Array(res.slice(0,12));
-  console.log(iv);
-  console.log(ziv);
-  const zalgo=algo//{name:"AES-GCM",ziv};
+  const zalgo={name:"AES-GCM",ziv};
+  console.log(algo);
   console.log(`dec(${JSON.stringify(algo)},key(${pass.value}),${new Uint8Array(ab)})`);
   console.log(`result:${new Uint8Array(await crypto.subtle.decrypt(algo,key,ab))}`);
+  console.log(zalgo);
   console.log(`dec(${JSON.stringify(zalgo)},key(${pass.value}),${new Uint8Array(ab)})`);
   console.log(`result:${new Uint8Array(await crypto.subtle.decrypt(zalgo,key,ab))}`);
   output.href=window.URL.createObjectURL(dlFile);
