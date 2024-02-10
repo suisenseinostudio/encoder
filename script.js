@@ -7,9 +7,8 @@ const output = document.getElementById("output");
 const encrypt=async()=>{
   if(pass.value==""||plain.files.length==0)return;
   const file=plain.files[0];
-  const ab=await enc(file,pass.value);
-  dec(ab,pass.value);
-  const dlFile=new File([iv,ab],file.name+"-e");
+  const dlFile=await enc(file,pass.value);
+  dec(dlFile,pass.value);
   output.href=window.URL.createObjectURL(dlFile);
   output.textContent="download encrypted file";
 };
