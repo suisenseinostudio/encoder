@@ -19,8 +19,9 @@ const encrypt=async()=>{
   const res=await dlFile.arrayBuffer();
   const ziv=new Uint8Array(res.slice(0,12));
   const zalgo={name:"AES-GCM",iv:ziv};
-  console.log(`dec(${JSON.stringify(zalgo)},key(${pass.value}),${new Uint8Array(ab)})`);
-  console.log(`result:${new Uint8Array(await crypto.subtle.decrypt(zalgo,key,ab))}`);
+  const zab=res.slice(12,res.byteLength);
+  console.log(`dec(${JSON.stringify(zalgo)},key(${pass.value}),${new Uint8Array(zab)})`);
+  console.log(`result:${new Uint8Array(await crypto.subtle.decrypt(zalgo,key,zab))}`);
   output.href=window.URL.createObjectURL(dlFile);
   output.textContent="download encrypted file";
 };
