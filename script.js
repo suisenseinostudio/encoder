@@ -24,10 +24,9 @@ const encrypt=async()=>{
   const data=await (new Blob([iv,file])).arrayBuffer();
   console.log(`data:${new Uint8Array(data)}`);
   const ab=await window.crypto.subtle.encrypt(algo,key,data);
+  console.log(new Uint8Array(ab));
   const dlFile=new File([iv,ab],file.name+"-e");
-  console.log(new Uint8Array(await dlFile.arrayBuffer(),0,12));
   output.href=window.URL.createObjectURL(dlFile);
-  console.log();
   output.textContent="download encrypted file";
 };
 
