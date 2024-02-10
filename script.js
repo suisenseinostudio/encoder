@@ -19,7 +19,7 @@ const encrypt=async()=>{
   const res=await dlFile.arrayBuffer();
   const zab=res.slice(12,res.byteLength);
   const ziv=res.slice(0,12);
-  const zalgo={name:"AES-GCM",ziv};
+  const zalgo={name:"AES-GCM",iv};
   //const key=await deriveKey(pass.value);
   console.log(`dec(${JSON.stringify(zalgo)},key(${pass.value}),${new Uint8Array(zab)})`);
   const rtn=await crypto.subtle.decrypt(zalgo,key,zab);
