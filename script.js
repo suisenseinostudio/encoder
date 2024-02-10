@@ -22,6 +22,7 @@ const encrypt=async()=>{
   const key=await deriveKey();
   const file=plain.files[0];
   const data=await (new Blob([iv,file])).arrayBuffer();
+  console.log(`data:${new Uint8Array(data)}`);
   const ab=await window.crypto.subtle.encrypt(algo,key,data);
   const dlFile=new File([iv,ab],file.name+"-e");
   console.log(new Uint8Array(await dlFile.arrayBuffer(),0,12));
