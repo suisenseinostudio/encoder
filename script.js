@@ -14,6 +14,8 @@ const encrypt=async()=>{
   console.log(`enc(${JSON.stringify(algo)},key(${pass.value}),${new Uint8Array(data)})`);
   const ab=await window.crypto.subtle.encrypt(algo,key,data);
   console.log(`result:${new Uint8Array(ab)}`);
+  console.log(`dec(${JSON.stringify(algo)},key(${pass.value}),${new Uint8Array(ab)})`);
+  console.log(`result:${new Uint8Array(await crypto.subtle.decrypt(algo,key,ab))}`);
   const dlFile=new File([iv,ab],file.name+"-e");
   output.href=window.URL.createObjectURL(dlFile);
   output.textContent="download encrypted file";
