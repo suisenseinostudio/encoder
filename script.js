@@ -10,7 +10,7 @@ const encrypt=async()=>{
   for(const file of plain.files){
     const dlFile=await enc(file,pass.value);
     const li=document.createElement("li");
-    li.innerHTML=`<a href="${window.URL.createObjectURL(dlFile)}">${dlFile.name}</a>`;
+    li.innerHTML=`<a href="${window.URL.createObjectURL(dlFile)}" download="${dlFile.name}">${dlFile.name}</a>`;
     output.append(li);
   };
 };
